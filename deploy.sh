@@ -1,6 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -x
+set -Eeuxo pipefail
+
+IFS=$'\n\t'
+
+trap 'echo Error at about $LINENO' ERR
 
 cat <<"EOS">~/.xsession
 exec ck-launch-session gnome-session --session awesome "$@" 
