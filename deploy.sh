@@ -41,7 +41,7 @@ X-GNOME-Provides=windowmanager
 X-GNOME-Autostart-Notify=false
 EOS
 
-sudo mv -vf /usr/share/xsessions/xsession.desktop /usr/share/xsessions/xsession.desktop.before
+#sudo mv -vf /usr/share/xsessions/xsession.desktop /usr/share/xsessions/xsession.desktop.before
 
 cat <<"EOS"|sudo tee -a /usr/share/xsessions/xsession.desktop
 [Desktop Entry]
@@ -51,5 +51,3 @@ Exec=/etc/X11/Xsession
 EOS
 
 git clone https://github.com/jeremyottley/awm.git ~/.config/awesome/
-
-echo "Now restart your display manager with something like this -- sudo service lightdm restart"
