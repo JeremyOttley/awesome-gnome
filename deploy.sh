@@ -46,12 +46,6 @@ Comment=This just runs ~/.xsession
 Exec=/etc/X11/Xsession
 EOS
 
-if [ ! -f ~/.config/awesome/rc.lua ] ; then
-  mkdir -p ~/.config/awesome
-  cp simple_awesome_config/rc.lua ~/.config/awesome
-  git clone git://git.glacicle.org/awesome/eminent.git
-  cp eminent/eminent.lua ~/.config/awesome/
-  rm -rf eminent
-fi
+git clone https://github.com/jeremyottley/awm.git ~/.config/awesome/
 
 echo "Now restart your display manager with something like this -- sudo service lightdm restart"
