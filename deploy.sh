@@ -6,6 +6,18 @@ IFS=$'\n\t'
 
 trap 'echo Error at about $LINENO' ERR
 
+git config --global user.name "jeremyottley"
+git config --global user.email "jeremy.ottley@gmail.com"
+git config --global core.autocrlf input
+git config --global core.safecrlf true
+git clone https://github.com/jeremyottley/.fonts.git ~/.fonts
+sudo fc-cache -vf
+git clone https://github.com/jeremyottley/.wallpapers.git ~/.wallpapers
+git clone https://github.com/jeremyottley/.cheatsheets.git ~/.cheatsheets
+git clone https://github.com/jeremyottley/bash-utils.git ~/.bash
+git clone https://github.com/jeremyottley/.pandoc.git ~/.pandoc
+git clone https://github.com/jeremyottley/Startpages.git ~/.startpages
+
 cat <<"EOS">~/.xsession
 exec ck-launch-session gnome-session --session awesome "$@" 
 EOS
@@ -803,3 +815,96 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- https://github.com/lcpz/awesome-copycats/issues/251
 -- }}}
 EOS
+
+mkdir ~/.urxvt
+git clone https://github.com/muennich/urxvt-perls ~/.urxvt/ext
+cat <<"EOS"> ~/.Xresources
+! Name
+! ====
+rxvt*termName: urxvt
+
+
+! Google Material Design
+
+*background 		: #263238
+*foreground 		: #eceff1
+
+! black
+*color0  			: #263238
+*color8  			: #37474f
+! red
+*color1  			: #ff9800
+*color9  			: #ffa74d
+! green
+*color2  			: #8bc34a
+*color10 			: #9ccc65
+! yellow
+*color3  			: #ffc107
+*color11 			: #ffa000
+! blue
+*color4  			: #03a9f4
+*color12 			: #81d4fa
+! magenta
+*color5  			: #e91e63
+*color13 			: #ad1457
+! cyan
+*color6  			: #009688
+*color14 			: #26a69a
+! white
+*color7  			: #cfd8dc
+*color15 			: #eceff1
+
+!! URxvt Appearance
+*.font: xft:Iosevka:style=Regular:size=13
+*.boldFont: xft:Iosevka:style=Bold:size=13
+*.italicFont: xft:Iosevka:style=Italic:size=13
+*.boldItalicFont: xft:Iosevka:style=Bold Italic:size=13
+URxvt.letterSpace: 0
+URxvt.lineSpace: 0
+URxvt.geometry: 92x24
+URxvt.internalBorder: 24
+URxvt.cursorBlink: true
+URxvt.cursorUnderline: false
+URxvt.saveline: 2048
+URxvt.scrollBar: false
+URxvt.scrollBar_right: false
+URxvt.urgentOnBell: true
+URxvt.depth: 24
+URxvt.iso14755: false
+
+!! Common Keybinds for Navigations
+URxvt.keysym.Shift-Up: command:\033]720;1\007
+URxvt.keysym.Shift-Down: command:\033]721;1\007
+URxvt.keysym.Control-Up: \033[1;5A
+URxvt.keysym.Control-Down: \033[1;5B
+URxvt.keysym.Control-Right: \033[1;5C
+URxvt.keysym.Control-Left: \033[1;5D
+
+!! Copy Paste & Other Extensions
+URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
+URxvt.copyCommand: xclip -i -selection clipboard
+URxvt.pasteCommand: xclip -o -selection clipboard
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.M-v: perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-s: perl:keyboard-select:search
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.urlLauncher: xdg-open
+URxvt.underlineURLs: true
+URxvt.urlButton: 3
+
+! allow filepaths to select as one, otherwise delimit
+URxvt.cutchars: "\"(),<>[]{}|'`"
+
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintslight
+Xft.hinting: 1
+Xft.rgba: rgb
+Xft.dpi: 96
+
+Xmessage*defaultButton:            okay
+Xmessage*form.message.Scroll:      WhenNeeded
+EOS
+
